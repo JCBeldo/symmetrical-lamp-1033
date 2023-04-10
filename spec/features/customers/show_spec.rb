@@ -8,13 +8,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Customer Show Page', type: :features do
+  let!(:customer_1) { Customer.create!(name: 'Billy Bob') }
+  let!(:customer_2) { Customer.create!(name: 'Gary Garble') }
   let!(:supermarket_1) { Supermarket.create!(name: 'Piggly Wiggly', location: "Austin, TX") }
   let!(:supermarket_2) { Supermarket.create!(name: 'King Stupor', location: "Denver, CO") }
   let!(:item_1) { supermarket_1.items.create!(name: 'Tofurky Slices', price: 3) }
   let!(:item_2) { supermarket_1.items.create!(name: 'Chao Cheese Slices', price: 5) }
-  let!(:customer_1) { item_1.customers.create!(name: 'Billy Bob') }
-  let!(:customer_1) { item_2.customers.create!(name: 'Billy Bob') }
-  let!(:customer_2) { Customer.create!(name: 'Gary Garble') }
 
   describe 'displays customer attributes' do
     it 'should display the name of the customer' do
@@ -29,7 +28,7 @@ RSpec.describe 'Customer Show Page', type: :features do
       expect(page).to have_content(item_1.name)
       expect(page).to have_content(item_1.price)
       expect(page).to have_content(item_2.name)
-      expect(page).to have_content(item_2.price)  
+      expect(page).to have_content(item_2.price)
       expect(page).to have_content('Piggly Wiggly')
     end
   end

@@ -12,23 +12,24 @@ RSpec.describe 'Customer Show Page', type: :features do
   let!(:supermarket_2) { Supermarket.create!(name: 'King Stupor', location: "Denver, CO") }
   let!(:item_1) { supermarket_1.items.create!(name: 'Tofurky Slices', price: 3) }
   let!(:item_2) { supermarket_1.items.create!(name: 'Chao Cheese Slices', price: 5) }
-  let!(:customer_1) { Customer.create!(name: 'Billy Bob') }
+  let!(:customer_1) { item_1.customers.create!(name: 'Billy Bob') }
+  let!(:customer_1) { item_2.customers.create!(name: 'Billy Bob') }
   let!(:customer_2) { Customer.create!(name: 'Gary Garble') }
 
   describe 'displays customer attributes' do
     it 'should display the name of the customer' do
       visit "/customers/#{customer_1.id}"
-      
       expect(page).to have_content(customer_1.name)
     end
     
     it 'should display a list of items, including price, belonging to the customer and where they came from.' do
       visit "/customers/#{customer_1.id}"
-
+      save_and_open_page
+      
       expect(page).to have_content(item_1.name)
       expect(page).to have_content(item_1.price)
       expect(page).to have_content(item_2.name)
-      expect(page).to have_content(item_2.price)
+      expect(page).to have_content(item_2.price)  
       expect(page).to have_content('Piggly Wiggly')
     end
   end

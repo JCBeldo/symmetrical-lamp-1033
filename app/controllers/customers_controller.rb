@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
-    # require 'pry'; binding.pry
+    @items = Item.all
   end
 end

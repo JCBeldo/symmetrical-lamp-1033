@@ -1,7 +1,9 @@
 <h1>Customer</h1>
 <%= @customer.name %>
-<% @customer.customer_items.each do |i| %>
-  <h3>Item:</h3><li>
-  <%= i.item.name %><%= i.item.price %><%= i.item.supermarket %>
+<h3>Items:</h3><li>
+<% @items.each do |item| %>
+  <li><%= item.name %>
+  <%= item.price %>
+  <%= item.supermarket %>
   </li>
 <% end %>
